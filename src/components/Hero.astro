@@ -1,0 +1,178 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+import "../pages/styles.css";
+import { heroContent as enContent } from "../utils/en.js";
+import { heroContent as frContent } from "../utils/fr.js";
+
+// import LogoImg3 from "../assets/Images/sailboat_hero.svg";
+import LogoImg4 from "../assets/Images/surf-boards.svg";
+// import LogoImg5 from "../assets/Images/SurfVan.jpg";
+import LogoImg from "../assets/Images/wave-surfer.jpg";
+
+const pathName = Astro.url.pathname;
+const currentLang = Astro.currentLocale ?? "fr";
+const content = currentLang === "en" ? enContent : frContent;
+---
+
+<section class="hero">
+  <div class="inner-hero">
+    <div class="hero-desc">
+      <p class="hero-eyebrow">
+        {content.eyebrow.lead}
+        <span class="name-badge">{content.eyebrow.name}</span>
+      </p>
+      <h1 class="hero-title">{content.title}</h1>
+      <p class="hero-motto-1">{content.heroDesc}</p>
+      <p class="hero-motto-2">
+        {content.heroDesc2}
+        <span class="desc-badge">{content.heroDesc2Span}</span>
+      </p>
+      <a href={content.projectLink} class="hero-proj-label">
+        {content.projectDesc}
+      </a>
+    </div>
+    <div class="hero-desc-2">
+      <img src={LogoImg.src} alt="" class="hero-img" />
+      <p class="hero-img-desc">
+        {content.imageDesc}
+        <a href="" class="hero-arr">
+          Read more →
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Mobile first approach */
+
+  .hero {
+    padding-block-start: 1.5rem;
+    /* border: 2px solid white; */
+  }
+
+  .hero-desc,
+  .hero-desc-2,
+  .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+  }
+
+  .hero-eyebrow {
+    font-size: var(--fs-body);
+    width: fit-content;
+    padding: 0.6em 1.8em;
+    font-family: var(--ff-handwriting);
+    background-color: var(--clr-pink);
+    color: var(--clr-yellow);
+    letter-spacing: 0.9;
+    font-weight: var(--fw-semibold);
+    line-height: 1.7;
+    max-width: none;
+    transform: rotate(-3deg);
+  }
+  .name-badge {
+    font-family: var(--ff-handwriting);
+    font-variant: small-caps;
+    letter-spacing: 1.96;
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-lead);
+    text-shadow: 2px 2px 0 #111;
+  }
+
+  .hero-motto-1 {
+    font-size: var(--fs-body);
+    font-family: var(--ff-handwriting);
+    color: var(--clr-white);
+    letter-spacing: 0.7;
+    font-weight: var(--fw-medium);
+    line-height: 1.7;
+  }
+
+  .hero-motto-2 {
+    font-size: var(--fs-body);
+    font-family: var(--ff-handwriting);
+    color: var(--clr-white);
+    letter-spacing: 0.7;
+    font-weight: var(--fw-medium);
+    line-height: 1.7;
+  }
+
+  .desc-badge {
+    background: linear-gradient(to top, var(--clr-pink) 20%, transparent 95%);
+    padding: 0.25em 0.8em;
+    box-decoration-break: clone;
+  }
+
+  .hero-title {
+    font-size: 4rem;
+    font-family: var(--ff-funky-title);
+    color: var(--clr-yellow);
+    letter-spacing: 1.5;
+  }
+
+  .hero-proj-label {
+    font-size: var(--fs-body);
+    font-family: var(--ff-body);
+    color: var(--clr-white);
+    letter-spacing: 0.7;
+    font-weight: var(--fw-regular);
+    text-decoration: none;
+    margin-block-start: 1rem;
+    width: fit-content;
+    margin-block-end: 2rem;
+  }
+
+  .hero-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    /* border: 3px solid var(--clr-pink); */
+    box-shadow: 10px 10px 30px var(--clr-navy-blue);
+    border-radius: 2rem;
+    margin-block-end: 1rem;
+  }
+
+  .hero-img-desc {
+    font-size: var(--fs-body);
+    font-family: var(--ff-body);
+    color: var(--clr-white);
+    letter-spacing: 0.5;
+    font-weight: var(--fw-medium);
+    text-align: center;
+  }
+  .hero-arr {
+    text-decoration: none;
+    font-size: var(--fs-body);
+    font-family: var(--ff-handwriting);
+    color: var(--clr-white);
+    letter-spacing: 0.5;
+    font-weight: var(--fw-regular);
+  }
+
+  @media (min-width: 700px) {
+    .hero-img {
+      height: 50vh;
+    }
+  }
+
+  @media (min-width: 970px) {
+    .inner-hero {
+      margin-inline: auto;
+      max-width: var(--max-width);
+      /* border: 2px solid white; */
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.3rem;
+      margin-block-start: 2rem;
+    }
+
+    .hero-desc {
+      display: flex;
+      gap: 2.3rem;
+      justify-content: center;
+    }
+  }
+</style>

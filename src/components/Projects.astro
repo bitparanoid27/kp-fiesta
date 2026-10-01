@@ -1,0 +1,131 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+import "../pages/styles.css";
+import { projectContent as enContent } from "../utils/en.js";
+import { projectContent as frContent } from "../utils/fr.js";
+
+import projImg1 from "../assets/Images/js_new.png";
+import projImg2 from "../assets/Images/sec_new.png";
+import projImg3 from "../assets/Images/nli_new.png";
+import projImg4 from "../assets/Images/waves.svg";
+import projImg5 from "../assets/Images/SumVan.jpg";
+
+const logos: Record<string, ImageMetadata> = {
+  "db-engine": projImg1,
+  "db-stock": projImg2,
+  "db-nli": projImg3,
+};
+
+const currentLang = Astro.currentLocale ?? "fr";
+const content = currentLang === "en" ? enContent : frContent;
+---
+
+<div class="projects" id="work">
+  <p class="proj-title">{content.title}</p>
+  <div class="proj-list">
+    <ul class="proj-elem">
+      {content.projectData.map((item) => (
+        <li class="proj-elem-li">
+          <a href={item.projectLink} class="">
+            <img src={logos[item.logoKey].src} alt="" class="proj-logo" />
+          </a>
+          <a href={item.projectLink} class="proj-name" target="_blank">
+            {item.projectLabel}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <img src={projImg5.src} alt="" class="wave-sep" />
+</div>
+
+<style>
+  .projects {
+    margin-block-start: 4rem;
+  }
+  .proj-logo {
+    max-width: 100%;
+    height: 6vh;
+  }
+  .proj-title {
+    margin-block-start: 1.5rem;
+    margin-block-end: 2.5rem;
+    max-width: none;
+    width: fit-content;
+    padding: 0.1rem 0.8rem;
+    font-size: var(--fs-h3);
+    font-family: var(--ff-play);
+    font-variant: small-caps;
+    font-weight: var(--fw-semibold);
+    color: var(--clr-yellow);
+    letter-spacing: 0.9;
+    line-height: 1.7;
+  }
+
+  .proj-elem {
+    list-style: none;
+    padding: 0;
+  }
+
+  .proj-elem-li {
+    display: flex;
+    align-items: center;
+    border-block-start: 1px dashed var(--clr-white);
+    border-inline: none;
+    padding-block: 2rem;
+  }
+  .proj-elem-li:last-child {
+    border-block-end: 1px dashed var(--clr-white);
+  }
+  .proj-name {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-family: var(--ff-body);
+    color: var(--clr-white);
+    margin-inline-start: 1rem;
+  }
+  .proj-elem-li::after {
+    content: "\2794";
+    font-size: 1.72rem;
+    margin-inline-start: auto;
+    color: var(--clr-white);
+  }
+
+  .wave-sep {
+    margin-block-start: 3.5rem;
+    border: 4px solid var(--clr-yellow);
+    box-shadow: 15px 15px 20px var(--clr-pink);
+    object-fit: cover;
+    border-radius: 20px;
+  }
+
+  @media (min-width: 970px) {
+    .projects {
+      margin-block-start: 7rem;
+      /* margin-block: 0; */
+    }
+    .proj-elem-li {
+      max-width: var(--max-width);
+    }
+    .proj-logo {
+      max-width: 100%;
+      height: 7vh;
+    }
+    .proj-name {
+      font-size: 2rem;
+      margin-inline-start: 2rem;
+      font-family: var(--ff-play);
+      font-weight: var(--fw-regular);
+      letter-spacing: 1;
+    }
+    .wave-sep {
+      margin-inline: auto;
+      margin-block-start: 9rem;
+      height: 50%;
+      width: var(--max-width);
+      object-fit: cover;
+      margin-block: 6rem;
+    }
+  }
+</style>

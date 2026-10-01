@@ -1,0 +1,239 @@
+@font-face {
+  font-family: "Nanum Pen Script";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/NanumPenScript-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Spicy Rice";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/SpicyRice-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/FiraSans-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/FiraSans-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fira Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/FiraSans-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Canela Web";
+  src:
+    url("../fonts/CanelaWeb-Medium.woff2") format("woff2"),
+    url("../fonts/CanelaWeb-Medium.woff") format("woff"),
+    url("../fonts/canelaweb-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPVmUsaaDhw.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjPVmUsaaDhw.woff2")
+    format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/Fraunces-VariableFont.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Cormorant";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorant/v24/H4c2BXOCl9bbnla_nHIA47NMUjsNbCVrFhFTc71q7T2u.woff2)
+    format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304,
+    U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+:root {
+  /* Brand */
+  --clr-teal: rgb(83, 133, 194);
+  --clr-black: rgb(59, 62, 68);
+  --clr-navy-blue: rgb(212, 227, 249);
+  --clr-light-blue: rgb(237, 249, 255);
+  --clr-grey: rgb(136, 154, 168);
+  --clr-white: rgb(255, 255, 255);
+  --clr-green: rgb(147, 191, 166);
+  --clr-dark-black: rgb(43, 43, 43);
+  --clr-orange: rgb(204, 115, 86);
+  --clr-cream: rgb(191, 170, 149);
+  --clr-pink: rgb(252, 46, 120);
+  --clr-yellow: rgb(247, 244, 115);
+  --clr-dark-green: rgb(0, 48, 58);
+  --clr-light-blue: rgb(8, 214, 217);
+
+  /* Fonts */
+  --ff-handwriting: "Nanum Pen Script", cursive;
+  --ff-header: "Spicy Rice", serif;
+  --ff-second-header: "Fira Sans", system-ui, sans-serif;
+  --ff-test: "Canela Web";
+  --ff-body: "JetBrains Mono", monospace;
+  --ff-title: "Fraunces";
+  --ff-play: "Cormorant";
+  --ff-funky-title: fantasy;
+
+  /* Font weights */
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+
+  /* Font sizes — mobile first */
+  --fs-h1: clamp(2.5rem, 5vw, 4rem);
+  --fs-h1-page: clamp(2rem, 4.8vw, 3.5rem);
+  --fs-h2-band: clamp(1.75rem, 3.8vw, 2.75rem);
+  --fs-h2: clamp(2rem, 3.6vw, 3.125rem);
+  --fs-h3: clamp(1.5625rem, 3.1vw, 2.25rem);
+  --fs-figure: clamp(2.5rem, 4.6vw, 3.5rem);
+  --fs-number: clamp(1.5rem, 1.6vw, 2.75rem);
+  --fs-lead: clamp(1.0625rem, 1.7vw, 1.25rem);
+  --fs-body: clamp(1rem, 1.6vw, 1.0625rem);
+  --fs-eyebrow: 0.875rem;
+  --fs-caption: 0.8125rem;
+
+  /* Layout */
+  --max-width: 73rem;
+  --padding-inline: 1.5rem;
+
+  /* Spacing */
+  --space-100: 0.25rem;
+  --space-200: 0.5rem;
+  --space-300: 0.75rem;
+  --space-400: 1rem;
+  --space-500: 1.5rem;
+  --space-600: 2rem;
+  --space-700: 2.5rem;
+  --space-800: 3rem;
+  --space-900: 3.5rem;
+  --space-1000: 4rem;
+
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --section-y: clamp(3rem, 6vw, 5rem);
+  --hero-y: clamp(3.5rem, 8vw, 7rem);
+  --transition: 0.18s ease;
+  --shadow-card: 0 0.75rem 1.75rem rgba(0, 82, 76, 0.1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--clr-black);
+  font-family: var(--ff-primary);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h1);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+h1::selection {
+  color: var(--clr-pink);
+}
+p::selection {
+  color: var(--clr-yellow);
+}
+
+a::selection {
+  color: var(--clr-orange);
+}
+
+p,
+li {
+  text-wrap: pretty;
+  max-width: 65ch;
+}
+
+[role="list"] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+body {
+  color: var(--clr-black);
+  font-family: var(--ff-handwriting);
+  margin: 0;
+  font-size: var(--fs-body);
+}
+
+.base-layout {
+  --padding: var(--padding-inline);
+  display: grid;
+  grid-template-columns:
+    minmax(var(--padding), 1fr)
+    min(var(--max-width), 100% - var(--padding) * 2)
+    minmax(var(--padding), 1fr);
+
+  & > * {
+    grid-column: 2 / 3;
+  }
+
+  & > .full-width {
+    grid-column: 1 / -1;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  section {
+    scroll-margin-top: 3.9rem;
+  }
+}

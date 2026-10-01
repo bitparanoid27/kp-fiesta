@@ -1,0 +1,52 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+import "../pages/styles.css";
+import { headerContent as enContent } from "../utils/en.js";
+import { headerContent as frContent } from "../utils/fr.js";
+import { undefined } from "astro:schema";
+
+const pathName = Astro.url.pathname;
+const currentLang = Astro.currentLocale ?? "fr";
+const content = currentLang === "en" ? enContent : frContent;
+---
+
+<header>
+  <nav class="nav-bar">
+    <ul class="nav-links">
+      {content.headerData.map((item) => (
+        <li class="nav-item">
+          <a
+            class={
+              pathName === item.pathLink
+                ? "nav-link-item-active"
+                : "nav-link-item"
+            }
+            href={item.pathLink}>
+            {item.pathName}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.7rem;
+    list-style: none;
+    padding-block: 0.87rem;
+  }
+  .nav-link-item {
+    text-decoration: none;
+    color: var(--clr-white);
+  }
+  .nav-link-item-active {
+    text-decoration: none;
+    color: var(--clr-white);
+    text-decoration: underline wavy;
+    text-underline-offset: 0.2rem;
+  }
+</style>

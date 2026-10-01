@@ -1,0 +1,229 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+import "../pages/styles.css";
+import { aboutMeContent as enContent } from "../utils/en.js";
+import { aboutMeContent as frContent } from "../utils/fr.js";
+
+import LogoImg3 from "../assets/Images/sailboat_hero.svg";
+import LogoImg4 from "../assets/Images/surf-boards.svg";
+import LogoImg5 from "../assets/Images/campervan.jpg";
+
+const pathName = Astro.url.pathname;
+const currentLang = Astro.currentLocale ?? "fr";
+const content = currentLang === "en" ? enContent : frContent;
+---
+
+<section class="hero">
+  <div class="inner-hero">
+    <div class="hero-desc">
+      <p class="hero-eyebrow">{content.eyebrow}</p>
+      <h1 class="hero-title">{content.title}</h1>
+      <p class="hero-para-1">
+        {content.persPara1}
+        <span class="name-badge">{content.para1High}</span>
+      </p>
+      <p class="hero-para-2">{content.persPara2}</p>
+      <p class="hero-para-3">
+        {content.persPara3}
+        <span class="desc-badge">{content.para3High}</span>
+        {content.persPara4}
+      </p>
+    </div>
+    <div class="hero-desc-2">
+      <img src={LogoImg4.src} alt="" class="hero-img" />
+    </div>
+  </div>
+  <div class="current-activities">
+    <div class="listen">
+      <p class="listen-header">{content.listenTitle}</p>
+      {content.listening.map((item) => (
+        <ul class="listen-list">
+          <li>
+            <a class="listen-elem" href={item.trackLink} target="_blank">
+              {item.trackTitle}
+            </a>
+          </li>
+        </ul>
+      ))}
+    </div>
+
+    <div class="read">
+      <p class="read-header">{content.readTitle}</p>
+      {content.reading.map((item) => (
+        <ul class="read-list">
+          <li>
+            <a class="listen-elem" href={item.bookLink} target="_blank">
+              {item.bookTitle}
+            </a>
+          </li>
+        </ul>
+      ))}
+    </div>
+
+    <div class="watch">
+      <p class="watch-header">{content.watchTitle}</p>
+      {content.watching.map((item) => (
+        <ul class="watch-list">
+          <li>
+            <a class="listen-elem" href={item.seriesLink} target="_blank">
+              {item.seriesTitle}
+            </a>
+          </li>
+        </ul>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Mobile first approach */
+
+  .hero {
+    /* margin-inline: 1em; */
+    padding-block-start: 1.5rem;
+  }
+
+  .hero-desc,
+  .hero-desc-2,
+  .hero {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .hero-eyebrow {
+    width: fit-content;
+    font-size: var(--fs-lead);
+    font-family: var(--ff-handwriting);
+    background-color: var(--clr-yellow);
+    color: var(--clr-pink);
+    padding: 0.4em 0.8em;
+    letter-spacing: 0.9;
+    font-weight: var(--fw-semibold);
+    line-height: 1.7;
+    max-width: none;
+    transform: rotate(2deg);
+  }
+
+  .hero-title {
+    text-transform: capitalize;
+    font-size: 4rem;
+    font-family: var(--ff-funky-title);
+    color: var(--clr-dark-black);
+    letter-spacing: 1.5;
+  }
+  .hero-eyebrow:hover {
+    transform: rotate(-10deg) scale(1.03);
+    transition: transform 0.15s;
+  }
+
+  .hero-para-1,
+  .hero-para-2,
+  .hero-para-3 {
+    font-size: var(--fs-body);
+    font-family: var(--ff-body);
+    color: var(--clr-white);
+    letter-spacing: 0.7;
+    font-weight: var(--fw-medium);
+    line-height: 1.7;
+  }
+  .name-badge {
+    font-family: var(--ff-handwriting);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-body);
+    color: var(--clr-dark-black);
+    letter-spacing: 0.96;
+  }
+
+  .desc-badge {
+    color: var(--clr-dark-black);
+    font-weight: var(--fw-semibold);
+  }
+  .hero-img {
+    height: 80%;
+    width: 100%;
+  }
+
+  .listen-list,
+  .read-list,
+  .watch-list {
+    list-style: none;
+    padding: 0;
+    margin-block: 0.5rem;
+  }
+  .listen-elem {
+    text-decoration: none;
+    font-size: var(--fs-body);
+    font-weight: var(--fw-medium);
+    font-family: var(--ff-body);
+    color: var(--clr-white);
+  }
+  .listen-elem:hover {
+    color: var(--clr-dark-green);
+    font-weight: var(--fw-semibold);
+  }
+
+  .current-activities {
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+  }
+  .listen {
+    background-image: var(Splatter1);
+  }
+
+  .listen-header,
+  .read-header,
+  .watch-header {
+    font-size: var(--fs-number);
+    font-weight: var(--fw-semibold);
+    font-family: var(--ff-title);
+    color: var(--clr-dark-green);
+    background-color: var(--clr-green);
+    width: fit-content;
+    padding: 0.25em 0.5em;
+    margin-block-end: 1.6rem;
+    letter-spacing: 0.6;
+    box-shadow: 3px 3px 0 var(--clr-dark-green);
+  }
+
+  .listen-header:hover {
+    transform: rotate(4deg) scale(1.03);
+    transition: transform 0.15s;
+  }
+  .read-header:hover {
+    transform: rotate(-4deg) scale(1.03);
+    transition: transform 0.15s;
+  }
+  .watch-header:hover {
+    transform: rotate(4deg) scale(1.03);
+    transition: transform 0.15s;
+  }
+
+  @media (min-width: 700px) {
+    .hero-img {
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 970px) {
+    .inner-hero {
+      margin-inline: auto;
+      max-width: var(--max-width);
+      /* border: 2px solid white; */
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.3rem;
+      margin-block-start: 2rem;
+    }
+    .current-activities {
+      display: grid;
+      grid-template-areas: "listen read watch";
+      gap: 2rem;
+      margin-block-start: 8rem;
+      margin-block-end: 4rem;
+    }
+  }
+</style>

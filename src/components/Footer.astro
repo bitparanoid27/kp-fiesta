@@ -1,0 +1,96 @@
+---
+import "../pages/styles.css";
+import { footerContent as enContent } from "../utils/en.js";
+import { footerContent as frContent } from "../utils/fr.js";
+
+const pathName = Astro.url.pathname;
+const currentLang = Astro.currentLocale ?? "fr";
+const content = currentLang === "en" ? enContent : frContent;
+---
+
+<section class="footer">
+  <div class="fav-quote">
+    <p class="quote-header">{content.quoteHeader}</p>
+    <p class="quote">{content.quote}</p>
+    <span class="quote-author">{content.quoteAuthor}</span>
+  </div>
+  <div class="more-work">
+    <p class="work-header">{content.workLabel}</p>
+    {content.workArray.map((item) => (
+      <a href={item.pathLink} class="work">
+        {item.pathName}
+      </a>
+    ))}
+  </div>
+  <div class="contact">
+    <p class="contact-header">{content.contactLabel}</p>
+    {content.contactArray.map((item) => (
+      <a href={item.pathItem} class="contact-link">
+        {item.pathName}
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .footer {
+    margin-block: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .quote-header,
+  .work-header,
+  .contact-header {
+    font-family: var(--ff-body);
+    letter-spacing: 0.75;
+    color: var(--clr-yellow);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-lead);
+  }
+
+  .quote,
+  .contact-link {
+    color: var(--clr-white);
+    letter-spacing: 0.5;
+    margin-block: 0.75rem;
+  }
+  .quote-author {
+    margin-block-start: 1rem;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: var(--fs-body);
+    color: var(--clr-navy-blue);
+  }
+
+  .work-header {
+    margin-block-end: 0.75rem;
+  }
+  .work {
+    text-decoration: none;
+    color: var(--clr-white);
+  }
+
+  .contact-link {
+    text-decoration: none;
+    color: var(--clr-white);
+    display: block;
+  }
+
+  @media (min-width: 970px) {
+    .footer {
+      display: grid;
+      grid-template-areas: "quote contact work";
+      gap: 6rem;
+      margin-block-start: 5rem;
+      margin-block-end: 3rem;
+    }
+    .fav-quote {
+      max-width: 55rem;
+    }
+    .quote {
+      /* border: 2px solid white; */
+      max-width: 35rem;
+    }
+  }
+</style>

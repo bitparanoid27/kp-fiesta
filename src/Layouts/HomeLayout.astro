@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../Layouts/BaseLayout.astro";
+import Projects from "../components/Projects.astro";
+import Hero from "../components/Hero.astro";
+---
+
+<BaseLayout title="Home">
+  <Hero />
+  <Projects />
+</BaseLayout>
+
+<style>
+  body {
+    background-color: var(--clr-dark-green);
+  }
+</style>

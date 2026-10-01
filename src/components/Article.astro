@@ -1,0 +1,76 @@
+---
+import "../pages/styles.css";
+import { articleContent as enContent } from "../utils/en.js";
+import { articleContent as frContent } from "../utils/fr.js";
+
+const pathName = Astro.url.pathname;
+const currentLang = Astro.currentLocale ?? "fr";
+const content = currentLang === "en" ? enContent : frContent;
+---
+
+<section class="article">
+  <div class="article-head">
+    <h1 class="article-header">{content.articleTitle}</h1>
+    <p class="article-motto">{content.articleSub}</p>
+  </div>
+  <div class="article-list">
+    {content.articles.map((item) => (
+      <a href="#" class="article-elem">
+        {item.articleName}
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .article-header {
+    text-align: center;
+    color: var(--clr-dark-green);
+    font-family: fantasy, "Tahoma";
+    letter-spacing: 0.96;
+  }
+  .article-motto {
+    text-align: center;
+    max-width: none;
+    color: var(--clr-dark-green);
+    font-size: var(--fs-lead);
+    margin-block-start: 0.8rem;
+  }
+  .article-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.77rem;
+    margin-block-start: 2rem;
+    padding-block: 1.5em;
+  }
+  .article-elem {
+    display: block;
+    width: fit-content;
+    text-decoration: none;
+    background: var(--clr-pink);
+    color: var(--clr-yellow);
+    padding: 0.89rem;
+    font-size: var(--fs-number);
+    font-family: var(--ff-body);
+    font-weight: 600;
+    text-align: center;
+  }
+  .article-elem:nth-child(odd) {
+    max-width: none;
+    transform: rotate(-2deg);
+  }
+  .article-elem:nth-child(even) {
+    max-width: none;
+    transform: rotate(2deg);
+  }
+  .article-elem:hover {
+    background: var(--clr-dark-green);
+  }
+
+  @media (min-width: 970px) {
+    .article-list {
+      padding-block: 9em;
+    }
+  }
+</style>
