@@ -1,0 +1,59 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post: any) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+import BlogLayout from "../../Layouts/BlogLayout.astro";
+---
+
+<BlogLayout>
+  <article class="post">
+    <h1>{post.data.title}</h1>
+    <Content />
+  </article>
+</BlogLayout>
+
+<style>
+  .post {
+    /* border: 2px solid white; */
+    margin: auto;
+    max-width: 55em;
+    /* padding-block: 1em; */
+  }
+  :global(h1) {
+    text-align: center;
+    font-family: var(--ff-header);
+    letter-spacing: 0.97;
+    color: var(--clr-dark-black);
+  }
+  :global(h2) {
+    font-size: var(--fs-number);
+    font-family: var(--ff-fancy);
+    margin-block: 1em;
+    font-weight: var(--fw-semibold);
+    color: var(--clr-dark-black);
+  }
+  .post :global(p) {
+    max-width: 55em;
+    font-family: var(--ff-fancy);
+    text-align: justify;
+    color: var(--clr-dark-black);
+  }
+
+  .post :global(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 2.5em auto;
+    border-radius: 8px;
+  }
+</style>

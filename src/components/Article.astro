@@ -15,7 +15,7 @@ const content = currentLang === "en" ? enContent : frContent;
   </div>
   <div class="article-list">
     {content.articles.map((item) => (
-      <a href="#" class="article-elem">
+      <a href={item.articleLink} class="article-elem">
         {item.articleName}
       </a>
     ))}
@@ -34,6 +34,7 @@ const content = currentLang === "en" ? enContent : frContent;
     max-width: none;
     color: var(--clr-dark-green);
     font-size: var(--fs-lead);
+    font-family: cursive;
     margin-block-start: 0.8rem;
   }
   .article-list {

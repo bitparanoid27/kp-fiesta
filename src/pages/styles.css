@@ -3,35 +3,35 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/fonts/NanumPenScript-Regular.woff2") format("woff2");
+  src: url("../assets/NanumPenScript-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Spicy Rice";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/fonts/SpicyRice-Regular.woff2") format("woff2");
+  src: url("../assets/SpicyRice-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Fira Sans";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("/fonts/FiraSans-Regular.woff2") format("woff2");
+  src: url("../assets/FiraSans-Regular.woff2") format("woff2");
 }
 @font-face {
   font-family: "Fira Sans";
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("/fonts/FiraSans-Medium.woff2") format("woff2");
+  src: url("../assets/FiraSans-Medium.woff2") format("woff2");
 }
 @font-face {
   font-family: "Fira Sans";
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url("/fonts/FiraSans-SemiBold.woff2") format("woff2");
+  src: url("../assets/FiraSans-SemiBold.woff2") format("woff2");
 }
 
 @font-face {
@@ -84,6 +84,37 @@
     U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
+@font-face {
+  font-family: "Bigshot";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url("https://cdn.jsdelivr.net/fontsource/fonts/cormorant:vf@latest/latin-wght-normal.woff2")
+    format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("https://cdn.jsdelivr.net/fontsource/fonts/bricolage-grotesque:vf@latest/latin-wght-normal.woff2")
+    format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nosifer";
+  src: url("https://cdn.jsdelivr.net/fontsource/fonts/nosifer@latest/latin-400-normal.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* body {
+  font-family: "Bricolage Grotesque", sans-serif;
+} */
+
 :root {
   /* Brand */
   --clr-teal: rgb(83, 133, 194);
@@ -92,7 +123,7 @@
   --clr-light-blue: rgb(237, 249, 255);
   --clr-grey: rgb(136, 154, 168);
   --clr-white: rgb(255, 255, 255);
-  --clr-green: rgb(147, 191, 166);
+  --clr-green-light: rgb(147, 191, 166);
   --clr-dark-black: rgb(43, 43, 43);
   --clr-orange: rgb(204, 115, 86);
   --clr-cream: rgb(191, 170, 149);
@@ -100,6 +131,11 @@
   --clr-yellow: rgb(247, 244, 115);
   --clr-dark-green: rgb(0, 48, 58);
   --clr-light-blue: rgb(8, 214, 217);
+  --clr-paper-yellow: rgb(255, 250, 240);
+  --clr-lemon: rgb(255, 241, 92);
+  --clr-pink-soft: rgb(255, 227, 240);
+  --clr-red: rgb(222, 50, 67);
+  --clr-green: rgb(9, 131, 23);
 
   /* Fonts */
   --ff-handwriting: "Nanum Pen Script", cursive;
@@ -110,6 +146,9 @@
   --ff-title: "Fraunces";
   --ff-play: "Cormorant";
   --ff-funky-title: fantasy;
+  --ff-fancy: "Bricolage Grotesque";
+  --ff-title2: "Bigshot";
+  --ff-letter: "Nosifer";
 
   /* Font weights */
   --fw-regular: 400;
@@ -180,6 +219,9 @@ h4 {
   text-wrap: balance;
 }
 h1::selection {
+  color: var(--clr-pink);
+}
+h2::selection {
   color: var(--clr-pink);
 }
 p::selection {

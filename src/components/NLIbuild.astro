@@ -1,0 +1,405 @@
+---
+const parts = [
+  {
+    letter: "B",
+    title: "Build and test",
+    desc: "How it works, its evaluation, and how it captures failures.",
+    section: "SECTIONS 03–05",
+    content: [
+      {
+        num: "03",
+        title: "Architecture",
+        artifact: "Data Flow V1 → V2",
+        status: "done",
+        summary: "High level view of the underlying system design.",
+        diagram: [
+          {
+            label: "V1 · Retrieve & judge together",
+            time: "1800 sec | 30 mins",
+            old: true,
+            steps: [
+              { box: "Source", note: "58K characters" },
+              { box: "Chunk 800/150", note: "105 passages" },
+              {
+                box: "NLI cross-encoder",
+                note: "Checks every (chunk, claim) pair, all 105",
+                hl: true,
+              },
+              { box: "Verdict", note: "3 possible" },
+            ],
+          },
+          {
+            label: "V2 · Retrieve, then judge",
+            time: "120 sec | 2 mins",
+            steps: [
+              { box: "Source", note: "58K characters" },
+              { box: "Chunk 800/150", note: "105 passages" },
+              { box: "Bi-encoder", note: "Keeps top 5 passages", hl: true },
+              {
+                box: "NLI cross-encoder",
+                note: "Checks only those 5",
+                hl: true,
+              },
+              { box: "Verdict", note: "3 possible" },
+            ],
+          },
+        ],
+        decision: [
+          "Bi-encoder retrieves relevant chunks, cross-encoder determines the semantic relationship between chunks and the claim.",
+        ],
+      },
+    ],
+  },
+];
+---
+
+<div class="build-container-2">
+  {parts.map((part) => (
+    <div class="part">
+      <div class="container-constant">
+        <p class="const-letter">{part.letter}</p>
+        <div class="const-job">
+          <p class="const-title">{part.title}</p>
+          <p class="const-desc">{part.desc}</p>
+          <p class="const-section">{part.section}</p>
+        </div>
+      </div>
+      <div class="arc-container">
+        {part.content.map((item) => (
+          <details>
+            <summary>
+              <span class="num">{item.num}</span>
+              <span class="head">
+                <span class="title">{item.title}</span>
+                <span class="art">{item.artifact}</span>
+                <span class={`chip-${item.status}`}>{item.status}</span>
+              </span>
+              <span class="sum">{item.summary}</span>
+            </summary>
+            <div class="detail">
+              {item.diagram && (
+                <div class="arch">
+                  {item.diagram.map((row) => (
+                    <div class:list={["flow-row", { old: row.old }]}>
+                      <p class="flow-head">
+                        {row.label}
+                        <span class="time">{row.time}</span>
+                      </p>
+                      <ol class="flow">
+                        {row.steps.map((s) => (
+                          <li class="step">
+                            <span class:list={["box", { hl: s.hl }]}>
+                              {s.box}
+                            </span>
+                            <span class="note">{s.note}</span>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {item.decision && (
+                <div class="decision">
+                  <span class="decision-label">Decision</span>
+                  {item.decision.map((d) => (
+                    <p>{d}</p>
+                  ))}
+                </div>
+              )}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  /* remove the grid marker arrow */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::marker {
+    content: "";
+  }
+  .part {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: 2.5rem;
+    padding-block: 2.5rem;
+    border-top: 2px solid var(--clr-dark-black);
+  }
+  .container-constant {
+    position: sticky;
+    top: 1.5rem;
+    align-self: start;
+  }
+  .const-letter {
+    margin: 0;
+    line-height: 1;
+    color: var(--clr-pink);
+    font-family: var(--ff-fancy);
+    font-size: 5rem;
+    -webkit-text-stroke: 2px var(--clr-dark-black);
+    text-shadow: 4px 3.2px 0 var(--clr-dark-black);
+    width: fit-content;
+  }
+  .const-job {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+  }
+  .const-job p {
+    margin: 0;
+  }
+  .const-title {
+    color: var(--clr-dark-black);
+    font-family: var(--ff-fancy);
+    font-size: var(--fs-number);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .const-desc {
+    color: var(--clr-black);
+    font-family: "Tahoma";
+    font-size: var(--fs-body);
+    opacity: 0.75;
+  }
+  .const-section {
+    margin-top: 0.4rem;
+    color: var(--clr-black);
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+  }
+  summary {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr) 1.5rem;
+    column-gap: 0.75rem;
+    row-gap: 0.4rem;
+    align-items: baseline;
+    padding-block: 1.5rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .num {
+    grid-column: 1;
+    grid-row: 1;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    color: var(--clr-pink);
+  }
+  .head {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.75rem;
+  }
+  .title {
+    margin-right: auto; /* pushes label + chip to the right */
+    font-family: var(--ff-fancy);
+    font-size: var(--fs-h3);
+    font-weight: bolder;
+    line-height: 1.25;
+    color: var(--clr-dark-black);
+  }
+  summary:hover .title {
+    color: var(--clr-pink);
+  }
+  .art {
+    color: var(--clr-dark-black);
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .chip-done,
+  .chip-working {
+    display: inline-block;
+    transform: rotate(-5deg);
+    padding: 0.25em 0.5rem;
+    border: 2px solid currentColor;
+    border-radius: 0.2rem;
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+  }
+  .chip-done {
+    color: var(--clr-green);
+  }
+  .chip-working {
+    color: var(--clr-pink-dark, #c2185b);
+  }
+
+  .sum {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: 75ch;
+    color: var(--clr-black);
+    font-family: "Tahoma";
+    opacity: 0.7;
+  }
+  details[open] .sum {
+    opacity: 1;
+  }
+
+  .detail {
+    padding: 0 2rem 1.75rem 3.5rem;
+  }
+
+  .arch {
+    display: grid;
+    gap: 1.75rem;
+    border-left: 5px solid var(--clr-dark-black);
+    padding-inline-start: 1.5em;
+  }
+
+  .flow-row {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  /* label on the left, lemon time on the right */
+  .flow-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin: 0;
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .time {
+    padding: 0.25rem 0.4rem;
+    background: var(--clr-lemon);
+    font-weight: 700;
+  }
+
+  .flow {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .step {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .box {
+    padding: 0.3rem 0.5rem;
+    border: 2px solid var(--clr-dark-black);
+    background: var(--clr-white, #fff);
+    font-family: var(--ff-body);
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .box.hl {
+    background: var(--clr-lemon);
+  } /* the models */
+
+  .note {
+    font-family: var(--ff-body);
+    font-size: 0.75rem;
+    opacity: 0.65;
+  }
+
+  /* V1 is quieter: dashed, faded */
+  .flow-row.old {
+    opacity: 0.7;
+  }
+  .flow-row.old .box {
+    border-style: dashed;
+    background: transparent;
+  }
+
+  /* decison */
+
+  .decision {
+    margin-top: 1.25rem;
+    padding: 0.75rem 1.65rem;
+    border-left: 5px solid var(--clr-pink);
+    background: var(--clr-pink-soft, #ffe3f0);
+  }
+  .decision p {
+    margin: 0;
+    font-family: var(--ff-title);
+    font-size: var(--fs-lead);
+    max-width: 75ch;
+  }
+  .decision-label {
+    display: block;
+    font-family: var(--ff-title);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: var(--fw-semibold);
+    color: var(--clr-pink-dark, #c2185b);
+  }
+
+  @media (max-width: 45rem) {
+    /* A, B, C block: stack on top, and stop sticking */
+    .part {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+      padding-block: 1.75rem;
+    }
+    .container-constant {
+      position: static;
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+
+    }
+    .const-letter {
+      font-size: 2.5rem;
+      -webkit-text-stroke: 1px var(--clr-dark-black);
+      text-shadow: 4px 2px 0 var(--clr-dark-black);
+    }
+
+    /* row header: shrink the number column */
+    summary {
+      grid-template-columns: 2rem minmax(0, 1fr) 1.25rem;
+      column-gap: 0.5rem;
+      padding-block: 1.1rem;
+    }
+    .title {
+      margin-right: 0; /* label and chip wrap under the title */
+      font-size: 1.2rem;
+    }
+
+    /* opened content: line up under the title, use the full width */
+    .detail {
+      padding: 0 0 1.5rem 2.5rem; /* 2rem number column + 0.5rem gap */
+    }
+
+    /* diagram */
+    .flow-head {
+      flex-wrap: wrap; /* time drops under the label if it doesn't fit */
+      gap: 0.4rem;
+    }
+    .step {
+      flex-wrap: wrap; /* a long note drops under its box */
+      gap: 0.25rem 0.6rem;
+    }
+    .box {
+      white-space: normal; /* long names like "NLI cross-encoder" can wrap */
+    }
+
+    .decision {
+      padding: 0.65rem 0.85rem;
+    }
+  }
+</style>

@@ -1,0 +1,394 @@
+---
+const parts = [
+  {
+    letter: "A",
+    title: "Define the job",
+    desc: "What the tool must do, decided before any model.",
+    section: "SECTIONS 01–02",
+    contents: [
+      {
+        num: "01",
+        title: "Why AI",
+        artifact: "Options compared",
+        status: "done",
+        summary:
+          "AI helps in automating tedious, repetative tasks. NLI models can help in accessing the logical similarity between two phrases, sentences, or texts.",
+        did: [
+          "Keyword rules break with a reworded or a paraphrased summary.",
+          "LLM-as-Judge is an alternative, but they come with own hallucination risks.",
+          "LLM-as-a-Judge are relatively expensive, as their I/O both are charged separately.",
+          "Access via API, brings vendor lock-in, latency, rate-limit issues.",
+          "NLI models specifically, are trained to classify the relationship between two sentences.",
+          "They offer a cost-efficient, fast and reliable alternative to LLM-as-a-Judge system.",
+          "They have their own disadvantages, they struggle with negations, numerical comparisons etc.",
+        ],
+        decision: [
+          "A small, specialized NLI model that run locally, instead of a model that runs in the cloud.",
+        ],
+      },
+      {
+        num: "02",
+        title: 'Definition of "correct":',
+        artifact: "Behavior spec",
+        status: "done",
+        summary: " A defined system behavior",
+        did: [
+          "System classifies claims as: Supported, Contradicted, Cannot confirm",
+          "Every claim is supported by an evidence (chunk) text.",
+          "Err on the side of caution",
+          "System latency remains under 5s.",
+        ],
+        decision: ["Default to `Cannot confirm` instead of `Contradicted`."],
+      },
+    ],
+  },
+];
+---
+
+<div class="build-container">
+  <div class="build-desc-container">
+    <p class="build-eyebrow">How I built it</p>
+    <p class="build-title">Three parts, seven decisions.</p>
+    <p class="build-desc">
+      The case study follows the questions every AI product has to answer. Open
+      any section to see work I did and the decisions I've made.
+    </p>
+  </div>
+
+  <div class="accordian-container">
+    {parts.map((part) => (
+      <div class="part">
+        <div class="container-constant">
+          <p class="const-letter">{part.letter}</p>
+          <div class="const-job">
+            <p class="const-title">{part.title}</p>
+            <p class="const-desc">{part.desc}</p>
+            <p class="const-section">
+              SECTIONS {part.contents[0].num}–
+              {part.contents[part.contents.length - 1].num}
+            </p>
+          </div>
+        </div>
+
+        <div class="case-study-accordian">
+          {part.contents.map((item) => (
+            <details name="framework" open={item.num === "01"}>
+              <summary>
+                <span class="num">{item.num}</span>
+                <span class="head">
+                  <span class="title">{item.title}</span>
+                  <span class="art">{item.artifact}</span>
+                  <span class={`chip-${item.status}`}>{item.status}</span>
+                </span>
+                <span class="sum">{item.summary}</span>
+              </summary>
+
+              <div class="detail">
+                <div class="detail">
+                  <ol>
+                    {item.did.map((text, i) => (
+                      <li class="detail-li">
+                        <span class="sub-num">
+                          {Number(item.num)}.{i + 1}
+                        </span>
+                        {text}
+                      </li>
+                    ))}
+                  </ol>
+
+                  {item.decision && (
+                    <div class="decision">
+                      <span class="decision-label">Decision</span>
+                      {item.decision.map((d) => (
+                        <p>{d}</p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  /* ── section header ── */
+  .build-container {
+    display: grid;
+    gap: 3rem;
+    margin-block: 5rem;
+  }
+  .build-desc-container {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .build-desc-container p {
+    margin: 0;
+  }
+  .build-eyebrow {
+    text-transform: uppercase;
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.1em;
+    font-weight: var(--fw-semibold);
+  }
+  .build-title {
+    color: var(--clr-dark-black);
+    font-family: var(--ff-fancy);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+  }
+  .build-desc {
+    color: var(--clr-black);
+    font-family: "Tahoma";
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    max-width: 55rem;
+    max-width: none;
+  }
+  .accordian-container {
+    font-family: "Tahoma";
+  }
+
+  /* ── one part = letter column + rows ── */
+  .part {
+    display: grid;
+    grid-template-columns: 15rem minmax(0, 1fr);
+    gap: 2.5rem;
+    padding-block: 2.5rem;
+    border-top: 2px solid var(--clr-dark-black);
+  }
+  .container-constant {
+    position: sticky;
+    top: 1.5rem;
+    align-self: start;
+  }
+  .const-letter {
+    margin: 0;
+    line-height: 1;
+    color: var(--clr-pink);
+    font-family: var(--ff-fancy);
+    font-size: 5rem;
+    -webkit-text-stroke: 2px var(--clr-dark-black);
+    text-shadow: 4px 4px 0 var(--clr-dark-black);
+    width: fit-content;
+  }
+  .const-job {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.75rem;
+  }
+  .const-job p {
+    margin: 0;
+  }
+  .const-title {
+    color: var(--clr-dark-black);
+    font-family: var(--ff-fancy);
+    font-size: var(--fs-number);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .const-desc {
+    color: var(--clr-black);
+    font-family: "Tahoma";
+    font-size: var(--fs-body);
+    opacity: 0.75;
+  }
+  .const-section {
+    margin-top: 0.4rem;
+    color: var(--clr-black);
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.1em;
+    opacity: 0.75;
+  }
+
+  /* ── rows ── */
+  details {
+    border-bottom: 1px solid var(--clr-grey);
+  }
+  details:last-of-type {
+    border-bottom: none;
+  }
+
+  summary {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr) 1.5rem;
+    column-gap: 0.75rem;
+    row-gap: 0.4rem;
+    align-items: baseline;
+    padding-block: 1.5rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::marker {
+    content: "";
+  }
+
+  /* + / − on the right */
+  /* summary::after {
+    content: "+";
+    grid-column: 3;
+    grid-row: 1;
+    text-align: right;
+    font-family: var(--ff-body);
+    font-size: 1.25rem;
+    color: var(--clr-grey);
+  }
+  details[open] summary::after {
+    content: "−";
+    color: var(--clr-pink);
+  } */
+
+  .num {
+    grid-column: 1;
+    grid-row: 1;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    color: var(--clr-pink);
+  }
+  .head {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.75rem;
+  }
+  .title {
+    margin-right: auto; /* pushes label + chip to the right */
+    font-family: var(--ff-fancy);
+    font-size: var(--fs-h3);
+    font-weight: bolder;
+    line-height: 1.25;
+    color: var(--clr-dark-black);
+  }
+  summary:hover .title {
+    color: var(--clr-pink);
+  }
+  .art {
+    color: var(--clr-dark-black);
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .chip-done,
+  .chip-working {
+    display: inline-block;
+    transform: rotate(-5deg);
+    padding: 0.25em 0.5rem;
+    border: 2px solid currentColor;
+    border-radius: 0.2rem;
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    text-transform: uppercase;
+  }
+  .chip-done {
+    color: var(--clr-green);
+  }
+  .chip-working {
+    color: var(--clr-pink-dark, #c2185b);
+  }
+
+  .sum {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: 75ch;
+    color: var(--clr-black);
+    opacity: 0.7;
+  }
+  details[open] .sum {
+    opacity: 1;
+  }
+
+  /* ── opened content ── */
+  .detail {
+    /* padding: 0 2rem 1.75rem 3.5rem; */
+    padding-inline-start: 1.75rem;
+    padding-block-end: 1.5rem;
+  } /* 2.75rem number column + 0.75rem gap */
+  .detail ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+    border-left: 5px solid var(--clr-dark-black);
+    padding-inline-start: 0.95rem;
+  }
+  .detail-li {
+    display: grid;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    font-size: var(--fs-body);
+  }
+  .sub-num {
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    padding-top: 0.2rem;
+    opacity: 0.6;
+  }
+
+  .decision {
+    margin-top: 1.25rem;
+    padding: 0.75rem 1rem;
+    border-left: 5px solid var(--clr-pink);
+    background: var(--clr-pink-soft, #ffe3f0);
+  }
+  .decision p {
+    margin: 0;
+    font-family: var(--ff-title);
+    font-size: var(--fs-lead);
+    max-width: 75ch;
+
+  }
+  .decision-label {
+    display: block;
+    font-family: var(--ff-title);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: var(--fw-semibold);
+    color: var(--clr-pink-dark, #c2185b);
+  }
+
+  /* ── phone ── */
+  @media (max-width: 45rem) {
+    .part {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding-block: 2rem;
+    }
+    .const-letter {
+      margin: 0;
+      line-height: 1;
+      color: var(--clr-pink);
+      font-family: var(--ff-fancy);
+      font-size: var(--fs-h1);
+      -webkit-text-stroke: 1.5px var(--clr-dark-black);
+      text-shadow: 2px 2px 0 var(--clr-dark-black);
+      width: fit-content;
+    }
+    .container-constant {
+      position: static;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .const-job {
+      margin-top: 0;
+    }
+    .detail {
+      padding: 0 0 1.5rem 1.5rem;
+      /* border-left: 1px solid var(--clr-grey); */
+      /* padding: 0; */
+    }
+  }
+</style>

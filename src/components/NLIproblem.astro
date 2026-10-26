@@ -1,0 +1,198 @@
+---
+const verdictCards = [
+  {
+    eyebrow: "Summary claim",
+    title: "He was afraid of running into his landlady.",
+    verdict: "supported",
+    before: "He was hopelessly in debt to his landlady, and ",
+    mark: "was afraid of meeting her",
+    after: ".",
+  },
+  {
+    eyebrow: "Summary claim",
+    title: "He owed his landlady nothing.",
+    verdict: "contradicted",
+    before: "He was ",
+    mark: "hopelessly in debt",
+    after: " to his landlady, and was afraid of meeting her.",
+  },
+  {
+    eyebrow: "Summary claim",
+    title: "His landlady was a widow.",
+    verdict: "unsure",
+    before:
+      "Nothing in the passage confirms or denies it, so the tool won't guess.",
+    mark: "",
+    after: "",
+  },
+];
+---
+
+<section class="problem">
+  <div class="problem-desc">
+    <p class="prob-eyebrow">What it does</p>
+    <p class="prob-title">One source sentence, three possible verdicts.</p>
+    <p class="prob-desc">
+      Every claim in a summary is checked against the source and stamped with
+      one of three answers.
+    </p>
+  </div>
+  <div class="prob-cards-grid">
+    {verdictCards.map((item) => (
+      <div class="prob-card">
+        <p class="card-eyebrow">{item.eyebrow}</p>
+        <p class="card-title">"{item.title}"</p>
+        <span class="stamp">{item.verdict}</span>
+        <p class="src">
+          Source: {item.before}
+          {item.mark && <mark>{item.mark}</mark>}
+          {item.after}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .problem {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .problem-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 0.97rem;
+  }
+  .prob-eyebrow {
+    text-transform: uppercase;
+    font-family: var(--ff-body);
+    font-size: var(--fs-body);
+    letter-spacing: 0.95;
+    font-weight: var(--fw-semibold);
+  }
+  .prob-title {
+    color: var(--clr-dark-black);
+    font-family: var(--ff-fancy);
+    font-size: var(--fs-h3);
+    font-weight: var(--fw-semibold);
+  }
+  .prob-desc {
+    color: var(--clr-black);
+    font-family: "Tahoma";
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+    letter-spacing: 0.5;
+    max-width: 55rem;
+  }
+  .prob-cards-grid {
+    display: grid;
+    gap: 1.5em;
+  }
+  .prob-card {
+    gap: 0.5rem;
+    border: 2px solid var(--clr-dark-black);
+    background-color: var(--clr-white);
+    padding: 0.5em;
+    box-shadow: 6px 6px 0 var(--clr-dark-black);
+  }
+  .card-eyebrow {
+    text-transform: uppercase;
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.95;
+    font-weight: 600;
+    margin-inline: 0.5rem;
+    margin-block-start: 0.5rem;
+  }
+  .card-title {
+    font-family: var(--ff-fancy);
+    font-size: var(--fs-lead);
+    font-weight: 900;
+    letter-spacing: 0.6;
+    margin-block-start: 0.25rem;
+    margin-block-end: 1.5rem;
+  }
+  .stamp {
+    opacity: 0;
+    -webkit-transform: scale(1.5) rotate(-6deg);
+    transition: all 0.3s cubic-bezier(0.3, 1.6, 0.5, 1);
+    display: inline-block;
+    border-style: double;
+    border-color: var(--clr-dark-black);
+    padding: 0.5em;
+    margin-inline-start: 1.75em;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-family: var(--ff-fancy);
+    width: fit-content;
+  }
+  .in .stamp {
+    opacity: 1;
+    -webkit-transform: scale(1.05) rotate(-6deg);
+  }
+  .prob-card:nth-child(1) {
+    transform: rotate(-1deg);
+  }
+  .prob-card:nth-child(2) {
+    transform: rotate(1deg);
+  }
+  .prob-card:nth-child(3) {
+    transform: rotate(-1deg);
+  }
+  .prob-card:nth-child(1) .stamp {
+    -webkit-transition-delay: 1.2s;
+    border-color: var(--clr-green);
+    color: var(--clr-green);
+  }
+  .prob-card:nth-child(2) .stamp {
+    -webkit-transition-delay: 1.4s;
+    border-color: var(--clr-red);
+    color: var(--clr-red);
+  }
+  .prob-card:nth-child(3) .stamp {
+    -webkit-transition-delay: 1.6s;
+    border-color: var(--clr-dark-black);
+    color: var(--clr-dark-black);
+  }
+  .src {
+    margin-block-start: 1.95rem;
+    border-top: 0.5px dashed var(--clr-grey);
+    font-family: "Tahoma";
+    font-size: var(--fs-lead);
+    padding-block: 0.25em;
+  }
+  .src > mark {
+    background-color: var(--clr-pink-soft);
+    padding: 0 3px;
+    box-decoration-break: clone;
+  }
+
+  @media (min-width: 700px) {
+    .prob-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5em;
+    }
+    .prob-card {
+      display: grid;
+      grid-row: span 4;
+      grid-template-rows: subgrid;
+    }
+    .src {
+      font-size: var(--fs-eyebrow);
+      padding: 0.5em;
+    }
+  }
+</style>
+
+<script>
+  const watcher = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) e.target.classList.add("in");
+    });
+  });
+  document
+    .querySelectorAll(".prob-card")
+    .forEach((card) => watcher.observe(card));
+</script>

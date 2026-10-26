@@ -25,7 +25,7 @@ const content = currentLang === "en" ? enContent : frContent;
   <div class="contact">
     <p class="contact-header">{content.contactLabel}</p>
     {content.contactArray.map((item) => (
-      <a href={item.pathItem} class="contact-link">
+      <a href={item.pathItem} class="contact-link" target="_blank">
         {item.pathName}
       </a>
     ))}
@@ -52,6 +52,7 @@ const content = currentLang === "en" ? enContent : frContent;
 
   .quote,
   .contact-link {
+    font-size: var(--fs-number);
     color: var(--clr-white);
     letter-spacing: 0.5;
     margin-block: 0.75rem;
@@ -69,6 +70,7 @@ const content = currentLang === "en" ? enContent : frContent;
   .work {
     text-decoration: none;
     color: var(--clr-white);
+    font-size: var(--fs-number);
   }
 
   .contact-link {

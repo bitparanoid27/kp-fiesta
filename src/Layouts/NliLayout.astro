@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../Layouts/BaseLayout.astro";
+import NLI from "../components/NLI.astro";
+import NLIProject from "../components/NLIproblem.astro";
+import NLIdefine from "../components/NLIdefine.astro";
+import NLIbuild from "../components/NLIbuild.astro";
+---
+
+<BaseLayout title="Home">
+  <NLI />
+  <NLIProject />
+  <NLIdefine />
+  <NLIbuild />
+</BaseLayout>
+
+<style>
+  body {
+    background-color: var(--clr-paper-yellow);
+    background-image: radial-gradient(#1b172412 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+</style>

@@ -1,0 +1,241 @@
+---
+import { Content } from "../components/markdown/nli.md";
+
+const numberGridContent = [
+  { num: 3, desc: "verdicts per claim" },
+  { num: 110, desc: "claims in NLI dataset" },
+  { num: "43 / 50", desc: " right passage found" },
+  { num: "$0", desc: "per check" },
+];
+---
+
+<section class="nli-project">
+  <div class="proj-hero">
+    <p class="proj-hero-eyebrow">
+      <span class="proj-1">project 01</span> ClaimCheck
+    </p>
+    <h1 class="proj-hero-title">
+      Catch the AI summary that <span class="h1-span">lies</span>.
+    </h1>
+    <p class="proj-hero-desc">
+      AI summaries sometimes say things the source never did. This tool checks
+      every claim against the original document and gives a verdict, with the
+      passage it used as proof. It runs free on a laptop.
+    </p>
+    <div class="proj-hero-btn-row">
+      <a href="#" class="how-it-built">
+        How was it built &darr;
+      </a>
+      <a href="#" class="live-btn">
+        Try it live &rarr;
+      </a>
+      <a href="#" class="src-code-btn">
+        Code
+      </a>
+    </div>
+
+    <div class="number-grid">
+      {numberGridContent.map((item) => (
+        <div class="num-grid-card">
+          <p class="num-grid-data">{item.num}</p>
+          <p class="num-grid-desc">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="proj-demo">
+      <figure class="source">
+        <figcaption class="bar">
+          <span>SOURCE_DOCUMENT.mp4</span>
+          <span>00:08</span>
+        </figcaption>
+        <div class="demo">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            poster="/nli/demo-poster.png"
+            aria-label="Demo: an AI summary is checked claim by claim">
+            <source src="/nli/demo.webm" type="video/webm" />
+            <source src="/nli/demo.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .proj-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    margin-block: 2em;
+    /* border: 2px solid green; */
+  }
+  .proj-1 {
+    background-color: var(--clr-lemon);
+    font-family: var(--ff-body);
+    font-size: var(--fs-lead);
+    text-transform: uppercase;
+    border: 2px solid var(--clr-black);
+    color: var(--clr-black);
+    width: fit-content;
+    letter-spacing: 0.95;
+    padding: 0.25em 0.5em;
+  }
+  .proj-hero-eyebrow {
+    font-family: var(--ff-fancy);
+    font-size: var(--fs-lead);
+    font-weight: var(--fw-semibold);
+    color: var(--clr-black);
+    width: fit-content;
+    letter-spacing: 0.95;
+    padding: 0.25em 0.5em;
+  }
+
+  .proj-hero-title {
+    font-family: var(--ff-fancy);
+    font-size: var(--fs-h1);
+    font-weight: 900;
+    font-weight: var(--fw-semibold);
+    color: var(--clr-dark-black);
+    letter-spacing: 0;
+  }
+  .h1-span {
+    background: linear-gradient(to top, var(--clr-pink) 10%, transparent 45%);
+    padding: 0.05em 0.01em;
+    box-decoration-break: clone;
+  }
+  .proj-hero-title::selection {
+    color: var(--clr-yellow);
+  }
+
+  .proj-hero-desc {
+    max-width: none;
+    color: var(--clr-black);
+    font-family: "Tahoma";
+    font-size: var(--fs-lead);
+    line-height: 1.5;
+  }
+
+  .proj-hero-btn-row {
+    display: grid;
+    grid-template-areas: "one two";
+    justify-content: start;
+    gap: 1.25em;
+    margin-block: 1.5rem;
+  }
+  .live-btn,
+  .how-it-built {
+    text-decoration: none;
+    background-color: var(--clr-pink);
+    color: var(--clr-white);
+    padding: 0.85em 0.8em;
+    font-size: var(--fs-body);
+    font-family: var(--ff-body);
+    font-weight: var(--fw-semibold);
+    border: 2px solid var(--clr-dark-black);
+    box-shadow: 6px 6px var(--clr-dark-black);
+    transition: transform 250ms;
+    max-width: fit-content;
+  }
+  .live-btn {
+    background-color: var(--clr-lemon);
+    color: var(--clr-dark-black);
+  }
+
+  .live-btn:hover {
+    transform: translateY(-10px);
+  }
+
+  .src-code-btn {
+    text-decoration: none;
+    background-color: var(--clr-white);
+    color: var(--clr-dark-black);
+    padding: 0.85em 1.2em;
+    font-size: var(--fs-body);
+    font-family: var(--ff-body);
+    font-weight: var(--fw-semibold);
+    border: 2px solid var(--clr-dark-black);
+    box-shadow: 6px 6px var(--clr-dark-black);
+    max-width: fit-content;
+  }
+
+  .source {
+    border: 2px solid var(--clr-dark-black);
+    background: var(--clr-white);
+    box-shadow: 6px 6px 0 var(--clr-dark-black);
+    /* transform: rotate(-1deg); */
+    margin: 0 0 28px;
+  }
+  .source .bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--clr-dark-black);
+    background: var(--clr-pink-soft);
+    font-family: var(--ff-body);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 1.5;
+    color: var(--clr-dark-black);
+  }
+
+  .number-grid {
+    display: grid;
+    grid-template-areas: "one two";
+    box-shadow: 4px 4px 0 var(--clr-dark-black);
+    margin-block: 1.2rem;
+  }
+  .num-grid-card {
+    border: 2px solid var(--clr-dark-black);
+    padding: 1rem;
+    background-color: var(--clr-white);
+  }
+  .num-grid-data {
+    font-family: var(--ff-fancy);
+    font-size: var(--fs-number);
+    font-weight: 900;
+    letter-spacing: 1.5;
+    color: var(--clr-dark-black);
+  }
+
+  .num-grid-desc {
+    font-family: var(--ff-second-header);
+    font-size: var(--fs-lead);
+    color: var(--clr-dark-black);
+  }
+
+  .demo {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  .demo video,
+  .demo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 800px) {
+    .proj-hero-btn-row {
+      display: grid;
+      grid-template-areas: "one two three";
+      justify-content: start;
+      gap: 1.5em;
+      margin-block: 1.5rem;
+    }
+    .number-grid {
+      display: grid;
+      grid-template-areas: "one two three four";
+      box-shadow: 4px 4px 0 var(--clr-dark-black);
+      margin-block: 1.2rem;
+      max-width: none;
+
+    }
+  }
+</style>

@@ -65,6 +65,7 @@ const content = currentLang === "en" ? enContent : frContent;
     width: fit-content;
     padding: 0.6em 1.8em;
     font-family: var(--ff-handwriting);
+    font-size: var(--fs-lead);
     background-color: var(--clr-pink);
     color: var(--clr-yellow);
     letter-spacing: 0.9;
@@ -75,6 +76,7 @@ const content = currentLang === "en" ? enContent : frContent;
   }
   .name-badge {
     font-family: var(--ff-handwriting);
+    font-size: var(--fs-figure);
     font-variant: small-caps;
     letter-spacing: 1.96;
     font-weight: var(--fw-semibold);
@@ -84,7 +86,7 @@ const content = currentLang === "en" ? enContent : frContent;
 
   .hero-motto-1 {
     font-size: var(--fs-body);
-    font-family: var(--ff-handwriting);
+    font-family: cursive;
     color: var(--clr-white);
     letter-spacing: 0.7;
     font-weight: var(--fw-medium);
@@ -93,7 +95,7 @@ const content = currentLang === "en" ? enContent : frContent;
 
   .hero-motto-2 {
     font-size: var(--fs-body);
-    font-family: var(--ff-handwriting);
+    font-family: cursive;
     color: var(--clr-white);
     letter-spacing: 0.7;
     font-weight: var(--fw-medium);
@@ -107,15 +109,15 @@ const content = currentLang === "en" ? enContent : frContent;
   }
 
   .hero-title {
-    font-size: 4rem;
-    font-family: var(--ff-funky-title);
+    font-size: 3.5em;
+    font-family: var(--ff-header);
     color: var(--clr-yellow);
     letter-spacing: 1.5;
   }
 
   .hero-proj-label {
     font-size: var(--fs-body);
-    font-family: var(--ff-body);
+    font-family: var(--ff-second-header);
     color: var(--clr-white);
     letter-spacing: 0.7;
     font-weight: var(--fw-regular);
@@ -129,7 +131,6 @@ const content = currentLang === "en" ? enContent : frContent;
     display: block;
     max-width: 100%;
     height: auto;
-    /* border: 3px solid var(--clr-pink); */
     box-shadow: 10px 10px 30px var(--clr-navy-blue);
     border-radius: 2rem;
     margin-block-end: 1rem;
@@ -137,7 +138,7 @@ const content = currentLang === "en" ? enContent : frContent;
 
   .hero-img-desc {
     font-size: var(--fs-body);
-    font-family: var(--ff-body);
+    font-family: var(--ff-second-header);
     color: var(--clr-white);
     letter-spacing: 0.5;
     font-weight: var(--fw-medium);
@@ -147,9 +148,12 @@ const content = currentLang === "en" ? enContent : frContent;
     text-decoration: none;
     font-size: var(--fs-body);
     font-family: var(--ff-handwriting);
+    font-size: var(--fs-lead);
     color: var(--clr-white);
     letter-spacing: 0.5;
     font-weight: var(--fw-regular);
+    margin-inline-start: 0.5em;
+    display: none;
   }
 
   @media (min-width: 700px) {

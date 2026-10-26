@@ -1,8 +1,8 @@
 const headerContent = {
   headerData: [
     { pathLink: "/", pathName: "Travail" },
-    { pathLink: "/build", pathName: "Projets" },
-    { pathLink: "/article", pathName: "Article" },
+    { pathLink: "/about", pathName: "About Me" },
+    { pathLink: "/articles", pathName: "Article" },
   ],
 };
 
@@ -28,10 +28,10 @@ const projectContent = {
       logoKey: "db-stock", 
       projectLabel: "Screener", 
       projectLink: "https://github.com/bitparanoid27/stock-manthan"},
-    {  
-      logoKey: "db-nli", 
-      projectLabel: "NLI claim verifier", 
-      projectLink: "#"},
+    // {  
+    //   logoKey: "db-nli", 
+    //   projectLabel: "NLI claim verifier", 
+    //   projectLink: "#"},
   ]
 }
 
@@ -54,9 +54,9 @@ const articleContent = {
   articleTitle: " I write stuff sometimes ",
   articleSub: "(I try to write stuff, but most of the times lazziness wins!!)",
   articles : [
-    { articleName: "I'm finally making AI projects"}, 
-    { articleName: "Zettelkasten a note taking system finally that works for me."}, 
-    { articleName: "What am I reading?"}, 
+     { articleLink: "/articles/nli", articleName: "I'm finally making AI projects"}, 
+    { articleLink: "/articles/zettelkasten", articleName: "Zettelkasten a note taking system finally that works for me."}, 
+    { articleLink: "/articles/reading", articleName: "What am I reading?"}, 
   ],
 };
 

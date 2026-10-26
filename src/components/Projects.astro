@@ -47,6 +47,7 @@ const content = currentLang === "en" ? enContent : frContent;
   .proj-logo {
     max-width: 100%;
     height: 6vh;
+    display: none;
   }
   .proj-title {
     margin-block-start: 1.5rem;
@@ -55,7 +56,7 @@ const content = currentLang === "en" ? enContent : frContent;
     width: fit-content;
     padding: 0.1rem 0.8rem;
     font-size: var(--fs-h3);
-    font-family: var(--ff-play);
+    font-family: var(--ff-second-header);
     font-variant: small-caps;
     font-weight: var(--fw-semibold);
     color: var(--clr-yellow);
@@ -81,13 +82,14 @@ const content = currentLang === "en" ? enContent : frContent;
   .proj-name {
     text-decoration: none;
     font-size: 1.5rem;
-    font-family: var(--ff-body);
+    font-family: var(--ff-second-header);
     color: var(--clr-white);
     margin-inline-start: 1rem;
   }
   .proj-elem-li::after {
     content: "\2794";
     font-size: 1.72rem;
+    padding-inline-end: 1em;
     margin-inline-start: auto;
     color: var(--clr-white);
   }
@@ -115,9 +117,8 @@ const content = currentLang === "en" ? enContent : frContent;
     .proj-name {
       font-size: 2rem;
       margin-inline-start: 2rem;
-      font-family: var(--ff-play);
+      font-family: var(--ff-second-header);
       font-weight: var(--fw-regular);
-      letter-spacing: 1;
     }
     .wave-sep {
       margin-inline: auto;
