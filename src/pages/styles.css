@@ -212,7 +212,7 @@ h2,
 h3,
 h4 {
   color: var(--clr-black);
-  font-family: var(--ff-primary);
+  /* font-family: var(--ff-primary); */
   font-weight: var(--fw-bold);
   font-size: var(--fs-h1);
   line-height: 1.1;
